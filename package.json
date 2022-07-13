@@ -1,0 +1,17 @@
+{
+  "name": "draganddrop_test",
+  "version": "1.0.0",
+  "description": "TypeScript practice drag and drop",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm start"
+  },
+  "keywords": [
+    "TS"
+  ],
+  "author": "Aram Aramyan <a.aramyan1997@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
