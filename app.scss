@@ -4,3 +4,118 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
+
+label,
+input,
+textarea {
+  display: block;
+  margin: 8px 0;
+}
+
+label {
+  font-weight: 700;
+}
+
+input,
+textarea {
+  width: 100%;
+  max-width: 480px;
+  padding: 4px 6px;
+  border: 1px solid #cccccc;
+
+  &:focus {
+    outline: none;
+    background: #fff5f9;
+  }
+}
+
+button {
+  padding: 12px 16px;
+  background: #ff0062;
+  border: 1px solid #ff0062;
+  cursor: pointer;
+  color: #ffffff;
+
+  &:hover,
+  &:active {
+    background: #a80041;
+    border-color: #a80041;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.projects {
+  margin: 16px;
+  border: 1px solid #ff0062;
+
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+    background: #ff0062;
+  }
+
+  h2 {
+    margin: 0;
+    color: #ffffff;
+  }
+
+  ul {
+    margin: 0;
+    padding: 16px;
+    list-style: none;
+  }
+
+  li {
+    margin: 16px;
+    padding: 16px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+
+    h2 {
+      margin: 8px 0;
+      color: #ff0062;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+#finished-projects {
+  border-color: #0044ff;
+
+  header {
+    background: #0044ff;
+  }
+
+  li {
+    h2 {
+      color: #0044ff;
+    }
+
+    h3 {
+      color: #575757;
+      font-size: 16px;
+    }
+  }
+
+  .droppable {
+    background: #d6e1ff;
+  }
+}
+
+#user-input {
+  margin: 16px;
+  padding: 16px;
+  border: 1px solid #ff0062;
+  background: #f7f7f7;
+}
+
+.droppable {
+  background: #ffe3ee;
+}
