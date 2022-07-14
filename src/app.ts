@@ -1,3 +1,22 @@
+// autoBind decorator
+function autoBind(
+  // _ and _2 means that I'm not going to use this values, but I need them.
+  _: any,
+  _2: string,
+  descriptor: PropertyDescriptor
+) {
+  const originalMethod = descriptor.value;
+  const adjustedDescriptor: PropertyDescriptor = {
+    configurable: true,
+    get() {
+      const boundFunc = originalMethod.bind(this);
+      return boundFunc;
+    }
+  };
+  return adjustedDescriptor
+}
+
+// ProjectInput Class
 class ProjectInput {
   templateElement: HTMLTemplateElement;
   hostElement: HTMLDivElement;
@@ -22,6 +41,7 @@ class ProjectInput {
     this.attach();
   }
 
+  @autoBind
   private submitHandler(evt: Event) {
     evt.preventDefault();
     console.log(`:::titleInputElement:::`, this.titleInputElement.value);
