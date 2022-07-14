@@ -1,3 +1,45 @@
+// Validation
+interface IValidatable {
+  value: string | number;
+  required?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  min?: number;
+  max?: number;
+}
+
+function validate(validatableInput: IValidatable) {
+  let isValid = true;
+
+  if(validatableInput.required) {
+    isValid = isValid && validatableInput.value.toString().trim().length !== 0;
+  }
+
+  if(
+    validatableInput.minLength != null
+    && typeof(validatableInput.value) === "string"
+  ) {
+    isValid = isValid && validatableInput.value.length >= validatableInput.minLength;
+  }
+
+  if(
+    validatableInput.maxLength != null
+    && typeof(validatableInput.value) === "string"
+  ) {
+    isValid = isValid && validatableInput.value.length <= validatableInput.maxLength;
+  }
+
+  if(validatableInput.min != null && typeof(validatableInput.value) === "number") {
+    isValid = isValid && validatableInput.value >= validatableInput.min;
+  }
+
+  if(validatableInput.max != null && typeof(validatableInput.value) === "number") {
+    isValid = isValid && validatableInput.value <= validatableInput.max;
+  }
+
+  return isValid;
+}
+
 // autoBind decorator
 function autoBind(
   // _ and _2 means that I'm not going to use this values, but I need them.
@@ -7,10 +49,8 @@ function autoBind(
 ) {
   const originalMethod = descriptor.value;
   const adjustedDescriptor: PropertyDescriptor = {
-    configurable: true,
     get() {
-      const boundFunc = originalMethod.bind(this);
-      return boundFunc;
+      return originalMethod.bind(this);
     }
   };
   return adjustedDescriptor
@@ -46,11 +86,30 @@ class ProjectInput {
     const enteredDescription = this.descriptionInputElement.value;
     const enteredPeople = this.peopleInputElement.value;
 
+    const titleValidatable: IValidatable = {
+      value: enteredTitle,
+      required: true
+    }
+
+    const descriptionValidatable: IValidatable = {
+      value: enteredDescription,
+      required: true,
+      minLength: 5,
+    }
+
+    const peopleValidatable: IValidatable = {
+      value: +enteredPeople,
+      required: true,
+      min: 1,
+      max: 5,
+    }
+
     if(
-      enteredTitle.trim().length === 0
-      || enteredDescription.trim().length === 0
-      || enteredPeople.trim().length === 0
-    ) {
+      !validate(titleValidatable)
+      || !validate(descriptionValidatable)
+      || !validate(peopleValidatable)
+    )
+     {
       alert("Invalid input, please try again!");
     } else {
       return [enteredTitle, enteredDescription, +enteredPeople];
@@ -70,6 +129,7 @@ class ProjectInput {
 
     if(Array.isArray(userInput)) {
       const [title, description, people] = userInput;
+      console.log(title, description, people);
       this.clearInputs();
     }
   }
