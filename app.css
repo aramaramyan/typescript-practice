@@ -68,6 +68,7 @@ button:focus {
   margin: 16px;
   padding: 16px;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+  background: #ffffff;
 }
 .projects li h2 {
   margin: 8px 0;
