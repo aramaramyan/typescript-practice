@@ -73,8 +73,8 @@ button:focus {
   margin: 8px 0;
   color: #ff0062;
 }
-.projects li p {
-  margin: 0;
+.projects li h3 {
+  margin: 8px 0;
 }
 
 #finished-projects {
